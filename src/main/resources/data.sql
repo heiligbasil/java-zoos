@@ -11,11 +11,11 @@ DELETE
 FROM zoo;
 
 INSERT INTO zoo (zooid, zooname)
-         VALUES (1, 'Gladys Porter Zoo'),
-                (2, 'Point Defiance Zoo'),
-                (3, 'San Diego Zoo'),
-                (4, 'San Antonio Zoo'),
-                (5, 'Smithsonian National Zoo');
+         VALUES (1, 'Gladys Porter ZTA'),
+                (2, 'Point Defiance ZTA'),
+                (3, 'San Diego ZTA'),
+                (4, 'San Antonio ZTA'),
+                (5, 'Smithsonian National ZTA');
 
 INSERT INTO telephone(phoneid, phonetype, phonenumber, zooid)
          VALUES (1, 'main', '555-555-5555', 1),
