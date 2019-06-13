@@ -10,6 +10,8 @@ interface ZtaService
 
     fun findZooById(zooid: Long): Zoo
 
+    fun findZooByName(zooname: String): Zoo
+
     fun findAnimalByType(animaltype: String): Animal
 
     fun getCountOfAnimalsInZoos(): MutableList<CountOfAnimalsInZoos>

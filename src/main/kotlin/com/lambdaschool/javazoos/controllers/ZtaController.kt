@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 import java.net.URI
-import java.util.ArrayList
 import javax.validation.Valid
 
 @RestController
@@ -36,6 +35,14 @@ class ZtaController
         return ResponseEntity(listOfOrds, HttpStatus.OK)
     }
 
+
+    @GetMapping(value = ["/zoo/name/{zooname}"], produces = ["application/json"])
+    fun findZooByName(@PathVariable zooname: String): ResponseEntity<*>
+    {
+        val zoo: Zoo = ztaService.findZooByName(zooname)
+        return ResponseEntity<Any>(zoo, HttpStatus.OK)
+    }
+
     @GetMapping(value = ["/animal/{animaltype}"], produces = ["application/json"])
     fun findAnimalByType(@PathVariable animaltype: String): ResponseEntity<*>
     {
@@ -57,7 +64,7 @@ class AdminController
     @Autowired
     lateinit var adminService: AdminService
 
-    @DeleteMapping(value = ["/zoo/{zooid}"], consumes = ["application/json"])
+    @DeleteMapping(value = ["/zoos/{zooid}"])
     fun deleteZooById(@PathVariable zooid: Long): ResponseEntity<*>
     {
         adminService.delete(zooid)
