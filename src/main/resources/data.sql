@@ -44,4 +44,4 @@ INSERT INTO zooanimals (zooid, animalid)
                 (3, 1),
                 (3, 2);
 
-alter sequence hibernate_sequence restart with 10;
+alter sequence hibernate_sequence restart with 13;

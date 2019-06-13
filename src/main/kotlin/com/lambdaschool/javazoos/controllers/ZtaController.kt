@@ -1,5 +1,6 @@
 package com.lambdaschool.javazoos.controllers
 
+import com.lambdaschool.javazoos.models.Animal
 import com.lambdaschool.javazoos.models.Zoo
 import com.lambdaschool.javazoos.services.AdminService
 import com.lambdaschool.javazoos.services.ZtaService
@@ -33,6 +34,13 @@ class ZtaController
     {
         val listOfOrds: Zoo = ztaService.findZooById(zooid)
         return ResponseEntity(listOfOrds, HttpStatus.OK)
+    }
+
+    @GetMapping(value = ["/animal/{animaltype}"], produces = ["application/json"])
+    fun findAnimalByType(@PathVariable animaltype: String): ResponseEntity<*>
+    {
+        val animal: Animal = ztaService.findAnimalByType(animaltype)
+        return ResponseEntity<Any>(animal, HttpStatus.OK)
     }
 
     @GetMapping(value = ["/animals"], produces = ["application/json"])

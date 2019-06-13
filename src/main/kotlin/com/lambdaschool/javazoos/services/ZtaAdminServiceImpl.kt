@@ -1,7 +1,9 @@
 package com.lambdaschool.javazoos.services
 
+import com.lambdaschool.javazoos.models.Animal
 import com.lambdaschool.javazoos.models.Zoo
-import com.lambdaschool.javazoos.repositories.Repository
+import com.lambdaschool.javazoos.repositories.AnimalRepository
+import com.lambdaschool.javazoos.repositories.ZooRepository
 import com.lambdaschool.javazoos.views.CountOfAnimalsInZoos
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -11,19 +13,22 @@ import javax.persistence.EntityNotFoundException
 class ZtaServiceImpl : ZtaService
 {
     @Autowired
-    lateinit var ztaRepository: Repository
+    lateinit var zooRepository: ZooRepository
+    @Autowired
+    lateinit var animalRepository: AnimalRepository
 
     override fun findAll(): MutableList<Zoo>
     {
         val mutableList: MutableList<Zoo> = mutableListOf<Zoo>()
-        ztaRepository.findAll().toCollection(mutableList)
+        zooRepository.findAll().toCollection(mutableList)
 
         return mutableList
     }
 
     override fun findZooById(zooid: Long): Zoo
     {
-        ztaRepository.findAll().forEach {
+        zooRepository.findAll().forEach {
+
             if (it.zooid == zooid)
             {
                 return@findZooById it
@@ -33,9 +38,26 @@ class ZtaServiceImpl : ZtaService
         throw EntityNotFoundException("Zoo $zooid not found!")
     }
 
+    override fun findAnimalByType(animaltype: String): Animal
+    {
+
+        return animalRepository.findByAnimaltype(animaltype) ?: throw EntityNotFoundException("Animal $animaltype not found!")
+
+        /*animalRepository.findAll().forEach {
+
+            if (it.animaltype == animaltype)
+            {
+                return@findAnimalByType it
+            }
+        }
+
+        throw EntityNotFoundException("Animal $animaltype not found!")*/
+    }
+
+
     override fun getCountOfAnimalsInZoos(): MutableList<CountOfAnimalsInZoos>
     {
-        return ztaRepository.getCountOfAnimalsInZoos()
+        return zooRepository.getCountOfAnimalsInZoos()
     }
 }
 
@@ -43,7 +65,7 @@ class ZtaServiceImpl : ZtaService
 class AdminServiceImpl : AdminService
 {
     @Autowired
-    lateinit var adminRepository: Repository
+    lateinit var adminRepository: ZooRepository
 
     override fun delete(zooid: Long)
     {
