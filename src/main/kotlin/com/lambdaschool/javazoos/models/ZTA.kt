@@ -28,6 +28,7 @@ data class Telephone(
         var phonenumber: String,
         @ManyToOne
         @JoinColumn(name = "zooid", nullable = false)
+        @JsonIgnoreProperties(value = ["telephones"])
         var zoo: Zoo? = null
 )
 

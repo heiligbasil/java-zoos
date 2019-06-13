@@ -1,6 +1,8 @@
 package com.lambdaschool.javazoos.services
 
 import com.lambdaschool.javazoos.models.Zoo
+import com.lambdaschool.javazoos.repositories.Repository
+import com.lambdaschool.javazoos.views.CountOfAnimalsInZoos
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import javax.persistence.EntityNotFoundException
@@ -45,9 +47,14 @@ class AdminServiceImpl : AdminService
 
     override fun delete(zooid: Long)
     {
-        adminRepository.findById(zooid).orElseThrow { EntityNotFoundException(zooid.toString()) }
-
-        adminRepository.deleteById(zooid)
+        if(adminRepository.findById(zooid).isPresent)
+        {
+            adminRepository.deleteById(zooid)
+        }
+        else
+        {
+            throw EntityNotFoundException(zooid.toString())
+        }
     }
 
     override fun update(zooData: Zoo, zooid: Long): Zoo

@@ -1,6 +1,9 @@
 package com.lambdaschool.javazoos.controllers
 
 import com.lambdaschool.javazoos.models.Zoo
+import com.lambdaschool.javazoos.services.AdminService
+import com.lambdaschool.javazoos.services.ZtaService
+import com.lambdaschool.javazoos.views.CountOfAnimalsInZoos
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
@@ -35,7 +38,7 @@ class ZtaController
     @GetMapping(value = ["/animals"], produces = ["application/json"])
     fun countOfAnimalsInZoos(): ResponseEntity<*>
     {
-        return ResponseEntity<ArrayList<CountOfAnimalsInZoos>>(ztaService.countStudentsInCourses, HttpStatus.OK)
+        return ResponseEntity<MutableList<CountOfAnimalsInZoos>>(ztaService.getCountOfAnimalsInZoos(), HttpStatus.OK)
     }
 }
 
@@ -44,7 +47,7 @@ class ZtaController
 class AdminController
 {
     @Autowired
-    lateinit var adminService: ZtaService
+    lateinit var adminService: AdminService
 
     @DeleteMapping(value = ["/zoo/{zooid}"], consumes = ["application/json"])
     fun deleteZooById(@PathVariable zooid: Long): ResponseEntity<*>

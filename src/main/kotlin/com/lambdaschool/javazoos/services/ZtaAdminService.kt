@@ -1,6 +1,7 @@
 package com.lambdaschool.javazoos.services
 
 import com.lambdaschool.javazoos.models.Zoo
+import com.lambdaschool.javazoos.views.CountOfAnimalsInZoos
 
 interface ZtaService
 {

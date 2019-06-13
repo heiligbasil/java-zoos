@@ -30,7 +30,7 @@ INSERT INTO animal (animalid, animaltype)
                 (3, 'monkey'),
                 (4, 'penguin'),
                 (5, 'tiger'),
-                (6, 'bear'),
+                (6, 'giraffe'),
                 (7, 'turtle');
 
 INSERT INTO zooanimals (zooid, animalid)
