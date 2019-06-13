@@ -1,0 +1,21 @@
+package com.lambdaschool.javazoos.services
+
+import com.lambdaschool.javazoos.models.Zoo
+
+interface ZtaService
+{
+    fun findAll(): MutableList<Zoo>
+
+    fun findZooById(zooid: Long): Zoo
+
+    fun getCountOfAnimalsInZoos(): MutableList<CountOfAnimalsInZoos>
+}
+
+interface AdminService
+{
+    fun delete(zooid: Long)
+
+    fun update(zooData: Zoo, zooid: Long): Zoo
+
+    fun create(zooData: Zoo): Zoo
+}

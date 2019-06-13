@@ -8,7 +8,7 @@ import javax.persistence.*
 data class Zoo(
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
-        val zooid: Long,
+        val zooid: Long = 0,
         var zooname: String = "",
         @OneToMany(mappedBy = "zoo")
         val telephones: MutableList<Telephone> = mutableListOf(),

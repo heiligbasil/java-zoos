@@ -26,7 +26,7 @@ class ZtaController
     }
 
     @GetMapping(value = ["/zoo/{zooid}"], produces = ["application/json"])
-    fun listZooById(@PathVariable zooid: String): ResponseEntity<*>
+    fun listZooById(@PathVariable zooid: Long): ResponseEntity<*>
     {
         val listOfOrds: Zoo = ztaService.findZooById(zooid)
         return ResponseEntity(listOfOrds, HttpStatus.OK)
@@ -49,7 +49,7 @@ class AdminController
     @DeleteMapping(value = ["/zoo/{zooid}"], consumes = ["application/json"])
     fun deleteZooById(@PathVariable zooid: Long): ResponseEntity<*>
     {
-        adminService!!.delete(zooid)
+        adminService.delete(zooid)
 
         return ResponseEntity<Any>(HttpStatus.OK)
     }
@@ -57,7 +57,7 @@ class AdminController
     @PutMapping(value = ["/zoo/{zooid}"])
     fun updateCustomerById(@RequestBody zooData: Zoo, @PathVariable zooid: Long): ResponseEntity<*>
     {
-        adminService!!.update(zooData, zooid)
+        adminService.update(zooData, zooid)
 
         return ResponseEntity<Any>(HttpStatus.OK)
     }
@@ -66,7 +66,7 @@ class AdminController
     fun addNewZoo(@Valid @RequestBody zooData: Zoo): ResponseEntity<*>
     {
         var zooCopy: Zoo = zooData
-        zooCopy = adminService!!.save(zooCopy)
+        zooCopy = adminService.create(zooCopy)
 
         val responseHeaders = HttpHeaders()
         val newURI: URI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{zooid}").buildAndExpand(zooCopy.zooid).toUri()
